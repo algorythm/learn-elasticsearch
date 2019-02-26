@@ -61,7 +61,7 @@ for post in blog.search("pet"):
         dogs += 1
 assert cats > 0 and dogs > 0
 
-print("Searching for 'cat' for user 1")
+print("Searching for 'awesome cat' for user 1")
 query = {
     "query": {
         "bool": {
