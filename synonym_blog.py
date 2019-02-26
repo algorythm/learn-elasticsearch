@@ -8,6 +8,9 @@ We want to say that a
 When searching for 'cat', we only want blog posts that include 'cat'.
 When searching for 'dog', we only want blog posts that include 'dog'.
 When searching for 'pet', we want blog posts that include 'cat' and 'dog'.
+
+See https://www.elastic.co/guide/en/elasticsearch/guide/master/synonyms-analysis-chain.html
+See https://stackoverflow.com/questions/34333486/one-way-synonym-search-in-elasticsearch
 """
 
 from elasticsearch import Elasticsearch
