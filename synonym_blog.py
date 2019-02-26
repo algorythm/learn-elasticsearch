@@ -1,3 +1,15 @@
+"""
+This script is for testing synonyms
+
+We want to say that a
+- cat is a pet
+- dog is a pet
+
+When searching for 'cat', we only want blog posts that include 'cat'.
+When searching for 'dog', we only want blog posts that include 'dog'.
+When searching for 'pet', we want blog posts that include 'cat' and 'dog'.
+"""
+
 from elasticsearch import Elasticsearch
 from blog_post import BlogPost
 from blog import Blog
@@ -24,12 +36,27 @@ sleep(1)
 
 posts = blog.get_posts()
 
+print("All posts")
 for post in posts:
     print(f"- {post.date}: {post.body}")
 
-print("Searching for 'awesome cat'")
-for post in blog.search("awesome cat"):
-    print(f"- {post.date}: {post.body}")
+print("Searching for 'cat'")
+
+for post in blog.search("cat"):
+    print(f"- {post.body}")
+    assert not "dog" in post.body
+for post in blog.search("dog"):
+    print(f"- {post.body}")
+    assert not "cat" in post.body
+cats = 0
+dogs = 0
+for post in blog.search("pet"):
+    print(f"- {post.body}")
+    if "cat" in post.body:
+        cats += 1
+    if "dog" in post.body:
+        dogs += 1
+assert cats > 0 and dogs > 0
 
 print("Searching for 'cat' for user 1")
 query = {
