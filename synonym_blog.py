@@ -84,3 +84,4 @@ query = {
 
 for post in blog.search(query):
     print(f"- {post.date}: {post.body}")
+    assert post.user_id == 1
